@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)  // For auditing fields
+@EntityListeners(AuditingEntityListener.class)
 public class Bug {
 
     @Id
@@ -20,23 +20,20 @@ public class Bug {
 
     private String title;
     private String description;
-
-    private String priority;  // You can switch to Enum if preferred
-
-    private String status = "OPEN";  // default when tester creates
-
+    private String priority;
+    private String status = "OPEN";
     private String resolution;
 
     @ManyToOne
-    @JoinColumn(name = "created_by_id")
+    @JoinColumn(name = "created_by_id", referencedColumnName = "id")
     private User createdBy;
 
     @ManyToOne
-    @JoinColumn(name = "assigned_to_id")
+    @JoinColumn(name = "assigned_to_id", referencedColumnName = "id")
     private User assignedTo;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
 
     @Temporal(TemporalType.TIMESTAMP)
