@@ -25,7 +25,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/projects")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://bug-tracker-system.onrender.com")
 public class ProjectController {
 
     private final ProjectRepository projectRepository;
