@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,30 +19,27 @@ public class Project {
     private Long id;
 
     private String name;
-    
     private String description;
-    
+
     @ManyToOne
-    @JoinColumn(name = "created_by")
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
     private User createdBy;
 
     @ManyToMany
     @JoinTable(
         name = "project_developers",
         joinColumns = @JoinColumn(name = "project_id"),
-        inverseJoinColumns = @JoinColumn(name = "developer_id")
+        inverseJoinColumns = @JoinColumn(name = "developer_id", referencedColumnName = "id")
     )
-    @JsonIgnoreProperties({"assignedAsDeveloper", "assignedAsTester", "password"}) // Prevent infinite loop
+    @JsonIgnoreProperties({"assignedAsDeveloper", "assignedAsTester", "password"})
     private Set<User> developers = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
         name = "project_testers",
         joinColumns = @JoinColumn(name = "project_id"),
-        inverseJoinColumns = @JoinColumn(name = "testers_id")
+        inverseJoinColumns = @JoinColumn(name = "testers_id", referencedColumnName = "id")
     )
-    @JsonIgnoreProperties({"assignedAsDeveloper", "assignedAsTester", "password"}) // Prevent infinite loop
+    @JsonIgnoreProperties({"assignedAsDeveloper", "assignedAsTester", "password"})
     private Set<User> testers = new HashSet<>();
-    
-    
 }
