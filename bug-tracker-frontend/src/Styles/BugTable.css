@@ -1,0 +1,220 @@
+.bug-table-container {
+  width: 100%;
+  margin: 1rem 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.bug-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+}
+
+.bug-table th {
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+.bug-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  color: #2c3e50;
+  vertical-align: middle;
+}
+
+.bug-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Status and Priority styling */
+.bug-table td:nth-child(3) { /* Priority column */
+  font-weight: 500;
+}
+
+.bug-table td:nth-child(4) { /* Status column */
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Priority colors */
+.bug-table td:nth-child(3)[data-priority="LOW"] { color: #27ae60; }
+.bug-table td:nth-child(3)[data-priority="MEDIUM"] { color: #f39c12; }
+.bug-table td:nth-child(3)[data-priority="HIGH"] { color: #e74c3c; }
+
+/* Status colors - Updated with all statuses and fixed alignment */
+.bug-table td:nth-child(4)[data-status="NEW"] { 
+  color: #3498db;
+  background-color: rgba(52, 152, 219, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  
+  align-items: center;
+  min-width: 80px;
+}
+
+.bug-table td:nth-child(4)[data-status="OPEN"] { 
+  color: #9b59b6;
+  background-color: rgba(155, 89, 182, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+ 
+  align-items: center;
+  min-width: 80px;
+}
+
+.bug-table td:nth-child(4)[data-status="ASSIGNED"] { 
+  color: #e67e22;
+  background-color: rgba(230, 126, 34, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  
+  align-items: center;
+  min-width: 80px;
+}
+
+.bug-table td:nth-child(4)[data-status="IN_PROGRESS"] { 
+  color: #f1c40f;
+  background-color: rgba(241, 196, 15, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+ 
+  align-items: center;
+  min-width: 80px;
+}
+
+.bug-table td:nth-child(4)[data-status="RESOLVED"] { 
+  color: #27ae60;
+  background-color: rgba(39, 174, 96, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+ 
+  justify-items: center;
+  align-items: center;
+  min-width: 80px;
+}
+
+.bug-table td:nth-child(4)[data-status="CLOSED"] { 
+  color: #7f8c8d;
+  background-color: rgba(127, 140, 141, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+ 
+  text-align: center;
+  min-width: 80px;
+}
+
+/* Developer assignment dropdown */
+.bug-table select {
+  width: 100%;
+  min-width: 150px;
+  padding: 0.5rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  font-size: 0.9rem;
+  color: #2c3e50;
+  cursor: pointer;
+}
+
+.bug-table select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Resolution input */
+.bug-table input[type="text"] {
+  width: 100%;
+  min-width: 200px;
+  padding: 0.5rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
+
+.bug-table input[type="text"]:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Action buttons */
+.bug-table button {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.bug-table button:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bug-table button:active {
+  transform: translateY(0);
+}
+
+/* Empty state styling */
+.bug-table td:empty::before {
+  content: "—";
+  color: #95a5a6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .bug-table-container {
+    margin: 0.75rem 0;
+  }
+  
+  .bug-table th,
+  .bug-table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .bug-table select,
+  .bug-table input[type="text"] {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bug-table-container {
+    margin: 0.5rem 0;
+  }
+  
+  .bug-table th,
+  .bug-table td {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+  
+  .bug-table button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .bug-table select,
+  .bug-table input[type="text"] {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+  }
+} 

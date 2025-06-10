@@ -1,0 +1,99 @@
+.view-testers-container {
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 64px);
+}
+
+.view-testers-title {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+}
+
+.testers-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.testers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.testers-table th {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.testers-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.testers-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.testers-table button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.testers-table button:last-child {
+  margin-right: 0;
+}
+
+.testers-table button.assign-button {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.testers-table button.assign-button:hover {
+  background-color: #357abd;
+}
+
+.testers-table button.remove-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.testers-table button.remove-button:hover {
+  background-color: #c82333;
+}
+
+.testers-table button.delete-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.testers-table button.delete-button:hover {
+  background-color: #5a6268;
+}
+
+@media (max-width: 768px) {
+  .view-testers-container {
+    padding: 1rem;
+  }
+  
+  .testers-table th,
+  .testers-table td {
+    padding: 0.75rem;
+  }
+  
+  .testers-table button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+} 
