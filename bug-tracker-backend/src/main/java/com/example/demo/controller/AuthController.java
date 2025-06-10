@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "https://bug-tracker-system.onrender.com")
+
 public class AuthController {
 	private final PasswordEncoder passwordEncoder;
     private final UserService userService;
