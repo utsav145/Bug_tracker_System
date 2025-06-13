@@ -64,29 +64,34 @@ public class BugController {
         return bugRepository.save(bug);
     }
 
-    @PutMapping("/{bugId}/assign/{developerId}")
-    public Bug assignBugToDeveloper(@PathVariable Long bugId,
-                                    @PathVariable Long developerId
-                                    ) {
-    	User user = userService.getCurrentUser();
-        if (!"ADMIN".equalsIgnoreCase(user.getRole())) {
-            throw new RuntimeException("Only admins can assign bugs.");
-        }
-
-        Bug bug = bugRepository.findById(bugId)
-                .orElseThrow(() -> new RuntimeException("Bug not found"));
-
-        User developer = userService.getUserByUserId(developerId);
-        if (!"DEVELOPER".equalsIgnoreCase(developer.getRole())) {
-            throw new RuntimeException("Assigned user must be a developer.");
-        }
-
-        bug.setAssignedTo(developer);
-        bug.setStatus("ASSIGNED");
-        System.out.println("Assigning bug " + bugId + " to developer " + developerId);
-
-        return bugRepository.save(bug);
+@PutMapping("/{bugId}/assign/{developerId}")
+public Bug assignBugToDeveloper(@PathVariable Long bugId,
+                                @PathVariable Long developerId) {
+    User user = userService.getCurrentUser();
+    if (!"ADMIN".equalsIgnoreCase(user.getRole())) {
+        throw new RuntimeException("Only admins can assign bugs.");
     }
+
+    Bug bug = bugRepository.findById(bugId)
+            .orElseThrow(() -> new RuntimeException("Bug not found"));
+
+    // Prevent reassignment if status is IN_PROGRESS or RESOLVED
+    String status = bug.getStatus().toUpperCase();
+    if ("IN_PROGRESS".equals(status) || "RESOLVED".equals(status)) {
+        throw new RuntimeException("Cannot reassign a bug that is already " + status + ".");
+    }
+
+    User developer = userService.getUserByUserId(developerId);
+    if (!"DEVELOPER".equalsIgnoreCase(developer.getRole())) {
+        throw new RuntimeException("Assigned user must be a developer.");
+    }
+
+    bug.setAssignedTo(developer);
+    bug.setStatus("ASSIGNED");
+    System.out.println("Assigning bug " + bugId + " to developer " + developerId);
+
+    return bugRepository.save(bug);
+}
 
     @PutMapping("/{bugId}/status")
     public ResponseEntity<?> updateBugStatus(@PathVariable Long bugId,
