@@ -87,8 +87,8 @@ A full-stack, role-based web application for managing software bugs, project ass
    ```bash
    git clone https://github.com/your-username/bug-tracker.git
    cd bug-tracker/backend
-   ```
-````
+   
+
 
 2. Configure `application.properties`:
 
