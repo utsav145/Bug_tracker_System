@@ -9,12 +9,25 @@ const BugReport = () => {
   const [titleFilter, setTitleFilter] = useState('');
   const [userRole, setUserRole] = useState('ADMIN');
   const [currentUsername, setCurrentUsername] = useState('');
+  const [timeFilters, setTimeFilters] = useState({
+    UNASSIGNED: '1_DAY',
+    ASSIGNED: '1_DAY',
+    IN_PROGRESS: '1_DAY',
+    RESOLVED: '1_DAY',
+  });
+
+  const [expandedSections, setExpandedSections] = useState({
+    UNASSIGNED: true,
+    ASSIGNED: true,
+    IN_PROGRESS: true,
+    RESOLVED: true,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
-      const username = localStorage.getItem("username"); 
+      const username = localStorage.getItem("username");
 
       setUserRole(role);
       setCurrentUsername(username);
@@ -46,7 +59,7 @@ const BugReport = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Bug assigned!");
-      // Refresh bug list
+
       const res = await axios.get("/bugs", {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -68,7 +81,6 @@ const BugReport = () => {
   const groupBugsByStatus = () => {
     let visibleBugs = bugs;
 
-    // Role-based filtering
     if (userRole === "DEVELOPER") {
       visibleBugs = bugs.filter(bug => bug.assignedTo?.username === currentUsername);
     } else if (userRole === "TESTER") {
@@ -91,7 +103,6 @@ const BugReport = () => {
 
     filtered.forEach(bug => {
       const status = bug.status?.toUpperCase() || 'UNASSIGNED';
-
       if (status === 'OPEN' && !bug.assignedTo) {
         grouped.UNASSIGNED.push(bug);
       } else if (grouped[status]) {
@@ -100,6 +111,68 @@ const BugReport = () => {
     });
 
     return grouped;
+  };
+
+  const filterByTime = (bugs, status) => {
+    const filter = timeFilters[status];
+    if (filter === "ALL") return bugs;
+
+    const now = new Date();
+    const cutoff = new Date(
+      now.getTime() - (filter === "1_DAY" ? 1 : 7) * 24 * 60 * 60 * 1000
+    );
+
+    return bugs.filter(bug => new Date(bug.createdAt) >= cutoff);
+  };
+
+  const toggleSection = (status) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [status]: !prev[status],
+    }));
+  };
+
+  const renderSection = (statusLabel, bugs) => {
+    const filteredBugs = filterByTime(bugs, statusLabel);
+    const isOpen = expandedSections[statusLabel];
+
+    return (
+      <div key={statusLabel} className="bug-list collapsible-section">
+        <div className="collapsible-header" onClick={() => toggleSection(statusLabel)}>
+          <h3>{statusLabel.replace('_', ' ')}</h3>
+          <button className="collapse-button">
+            {isOpen ? '▼' : '▶'}
+          </button>
+        </div>
+
+        {isOpen && (
+          <>
+            <select
+              value={timeFilters[statusLabel]}
+              onChange={(e) =>
+                setTimeFilters({ ...timeFilters, [statusLabel]: e.target.value })
+              }
+              className="dropdown"
+            >
+              <option value="ALL">All</option>
+              <option value="1_DAY">Last 1 Day</option>
+              <option value="7_DAY">Last 7 Days</option>
+            </select>
+
+            {filteredBugs.length > 0 ? (
+              <BugTable
+                bugs={filteredBugs}
+                userRole={userRole}
+                onAssignClick={handleAssignClick}
+                developers={developers}
+              />
+            ) : (
+              <p className="no-bugs-message">No bugs found for selected time range.</p>
+            )}
+          </>
+        )}
+      </div>
+    );
   };
 
   const groupedBugs = groupBugsByStatus();
@@ -115,33 +188,12 @@ const BugReport = () => {
         onChange={(e) => setTitleFilter(e.target.value)}
       />
 
-      {/* Unassigned - Only visible to ADMIN */}
-      {(userRole === 'ADMIN' || userRole==="TESTER") && groupedBugs.UNASSIGNED.length > 0 && (
-        <div className="bug-list">
-          <h3>Unassigned</h3>
-          <BugTable
-            bugs={groupedBugs.UNASSIGNED}
-            userRole={userRole}
-            onAssignClick={handleAssignClick}
-            developers={developers}
-          />
-        </div>
-      )}
-
-      {/* Assigned, In Progress, Resolved - All roles */}
-      {["ASSIGNED", "IN_PROGRESS", "RESOLVED"].map(status => (
-        groupedBugs[status]?.length > 0 && (
-          <div key={status} className="bug-list">
-            <h3>{status.replace('_', ' ')}</h3>
-            <BugTable
-              bugs={groupedBugs[status]}
-              userRole={userRole}
-              onAssignClick={handleAssignClick}
-              developers={developers}
-            />
-          </div>
-        )
-      ))}
+      {["UNASSIGNED", "ASSIGNED", "IN_PROGRESS", "RESOLVED"].map(status => {
+        if (status === 'UNASSIGNED' && userRole !== 'ADMIN' && userRole !== 'TESTER') {
+          return null;
+        }
+        return renderSection(status, groupedBugs[status]);
+      })}
     </div>
   );
 };
