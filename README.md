@@ -153,10 +153,18 @@ Password: developer123
 
 *Add relevant screenshots here:*
 
-* Admin Dashboard
-* Bug Assignment
-* Tester Bug Creation
-* Developer Resolution Form
+## Login Page
+![Login Page](screenshots/login.png)
+
+## Admin Dashboard
+![Admin Dashboard](screenshots/dashboard.png)
+
+## Tester View
+![Tester View](screenshots/tester-view.png)
+
+## Developer Bug Table
+![Developer Bug Table](screenshots/dev-bugs.png)
+
 
 ---
 
@@ -182,7 +190,4 @@ This project is licensed under the MIT License.
 
 ```
 
----
 
-Let me know if you want me to generate screenshots or add Docker instructions as well!
-```
