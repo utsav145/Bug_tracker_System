@@ -153,8 +153,8 @@ Password: developer123
 
 *Add relevant screenshots here:*
 
-## Login Page
-![Login Page](screenshots/login.png)
+## Home page
+![Home Page](screenshots/home.png)
 
 ## Admin Dashboard
 ![Admin Dashboard](screenshots/dashboard.png)
