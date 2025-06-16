@@ -154,7 +154,7 @@ Password: developer123
 *Add relevant screenshots here:*
 
 ## Home page
-[![Home Page](screenshots/home.png)](https://files.oaiusercontent.com/file-J8YfkxzNHQbYtatVadDFas?se=2025-06-16T12%3A43%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D1db101f3-fbaa-42a4-85de-14b0550ae845.png&sig=vnm/7tC4XRY4M0kKeSI/arVrLKM6RROWc8nBoXTfNi4%3D)
+(https://files.oaiusercontent.com/file-J8YfkxzNHQbYtatVadDFas?se=2025-06-16T12%3A43%3A00Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D1db101f3-fbaa-42a4-85de-14b0550ae845.png&sig=vnm/7tC4XRY4M0kKeSI/arVrLKM6RROWc8nBoXTfNi4%3D)
 
 ## Admin Dashboard
 ![Admin Dashboard](screenshots/dashboard.png)
