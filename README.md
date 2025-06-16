@@ -163,7 +163,7 @@ Password: developer123
 ![Tester View](screenshots/tester-view.png)
 
 ## Developer Bug Table
-![Developer Bug Table](screenshots/dev-bugs.png)
+![Developer Bug Table](/Screenshot 2025-06-16 181830.png)
 
 
 ---
