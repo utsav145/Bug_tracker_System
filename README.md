@@ -180,7 +180,7 @@ Password: developer123
 ## 👨‍💻 Author
 
 **Utsav Gavli**
-[LinkedIn](https://www.linkedin.com/) • [GitHub](https://github.com/your-username) • [Portfolio](https://your-portfolio.com)
+[LinkedIn](https://www.linkedin.com/) • [GitHub](https://github.com/utsav145) • [Portfolio](https://your-portfolio.com)
 
 ---
 
