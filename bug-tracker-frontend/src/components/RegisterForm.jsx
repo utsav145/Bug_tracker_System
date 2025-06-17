@@ -21,7 +21,11 @@ const RegisterForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post("/auth/register", formData);
+      await axios.post("/auth/register", formData, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  }
+});
       setMessage('User registered successfully');
     } catch (err) {
       setMessage('Error during registration');
