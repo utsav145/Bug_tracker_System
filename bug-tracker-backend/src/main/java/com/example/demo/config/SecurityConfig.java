@@ -32,7 +32,10 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/auth/login").permitAll()
+                                       
+                                .requestMatchers(HttpMethod.PUT, "/api/auth/register").hasRole("ADMIN")
+                                       
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 // TESTER
                                 .requestMatchers(HttpMethod.POST, "/api/bugs").hasRole("TESTER")
