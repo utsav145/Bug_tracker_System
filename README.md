@@ -133,16 +133,16 @@ A full-stack, role-based web application for managing software bugs, project ass
 
 ```
 Admin:
-Username: admin
+Username: admin123
 Password: admin123
 
 Tester:
-Username: tester
-Password: tester123
+Username: mukta444
+Password: mukta444
 
 Developer:
-Username: developer
-Password: developer123
+Username: Utsav444
+Password: Utsav444
 ```
 
 ## 🔮 Future Enhancements
